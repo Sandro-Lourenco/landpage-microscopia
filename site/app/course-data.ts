@@ -1,5 +1,9 @@
+const defaultHotmartCheckoutUrl = "https://pay.hotmart.com/S106758446S";
+
 export const siteConfig = {
-  checkoutUrl: process.env.NEXT_PUBLIC_HOTMART_CHECKOUT_URL?.trim() ?? "",
+  checkoutUrl:
+    process.env.NEXT_PUBLIC_HOTMART_CHECKOUT_URL?.trim() ||
+    defaultHotmartCheckoutUrl,
   supportEmail: "icibina@yahoo.com",
   institutionWebsite: "",
   courseName:

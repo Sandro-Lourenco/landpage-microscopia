@@ -3,11 +3,29 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
+  ArrowDown,
+  ArrowUpRight,
+  Check,
+  EnvelopeSimple,
+  FacebookLogo,
+  MapPin,
+  Phone,
+  X,
+} from "@phosphor-icons/react";
+import {
   faqs,
   learningOutcomes,
   modules,
   siteConfig,
 } from "./course-data";
+import {
+  AmbientLights,
+  DepthCard,
+  HeroReveal,
+  MicroscopeMotion,
+  PageProgress,
+  RevealSection,
+} from "./motion-elements";
 
 type Consent = "accepted" | "rejected" | null;
 
@@ -41,11 +59,76 @@ function BrandMark() {
 }
 
 function ArrowIcon() {
-  return <span aria-hidden="true">↗</span>;
+  return <ArrowUpRight aria-hidden="true" size={17} weight="bold" />;
 }
 
 function CheckIcon() {
-  return <span className="check-icon" aria-hidden="true">✓</span>;
+  return <Check className="check-icon" aria-hidden="true" size={18} weight="bold" />;
+}
+
+function LeadCaptureForm() {
+  const formAttributes = { "klicksend-form-id": "VKuXpMb" };
+  const submitAttributes = { "klicksend-form-submit-id": "VKuXpMb" };
+
+  return (
+      <form
+        {...formAttributes}
+        className="lead-form"
+        autoComplete="off"
+        method="post"
+        action="https://handler.send.hotmart.com/subscription/VKuXpMb?hotfeature=53"
+        onSubmit={(event) => {
+          event.currentTarget.action = preserveUtm(event.currentTarget.action);
+        }}
+      >
+        <label>
+          <span>E-mail *</span>
+          <input type="email" name="email" autoComplete="email" placeholder="voce@exemplo.com" required />
+        </label>
+        <div className="lead-form-row">
+          <label>
+            <span>Primeiro nome</span>
+            <input type="text" name="first_name" autoComplete="given-name" placeholder="Seu nome" />
+          </label>
+          <label>
+            <span>WhatsApp</span>
+            <input type="tel" name="phone" autoComplete="tel" placeholder="(00) 00000-0000" />
+          </label>
+        </div>
+        <div className="lead-honeypot" aria-hidden="true">
+          <input
+            type="text"
+            autoComplete="new-password"
+            name="b_VKuXpMb"
+            tabIndex={-1}
+          />
+        </div>
+        <label className="lead-consent">
+          <input
+            type="checkbox"
+            name="gdpr"
+            value="Concordo em receber os e-mails"
+            required
+          />
+          <span>
+            Concordo em receber informações e ofertas do ICIBINA por e-mail.
+            Posso cancelar a qualquer momento. Consulte a{" "}
+            <a href="/politica-de-privacidade">Política de Privacidade</a>.
+          </span>
+        </label>
+        <button
+          {...submitAttributes}
+          className="button button-primary full"
+          type="submit"
+        >
+          Quero receber informações <ArrowIcon />
+        </button>
+        <small>
+          Cadastro protegido pelo Hotmart Send. Após o envio, você será
+          direcionado ao checkout oficial do curso.
+        </small>
+      </form>
+  );
 }
 
 export default function Home() {
@@ -80,6 +163,7 @@ export default function Home() {
 
   return (
     <main>
+      <PageProgress />
       <header className="site-header">
         <a className="skip-link" href="#conteudo">Ir para o conteúdo</a>
         <div className="shell header-inner">
@@ -97,10 +181,11 @@ export default function Home() {
 
       <div id="conteudo">
         <section className="hero" id="inicio">
+          <AmbientLights />
           <div className="hero-orbit orbit-one" aria-hidden="true" />
           <div className="hero-orbit orbit-two" aria-hidden="true" />
           <div className="shell hero-grid">
-            <div className="hero-copy">
+            <HeroReveal className="hero-copy">
               <p className="eyebrow"><span /> Formação em microscopia aplicada</p>
               <h1>
                 Veja além.
@@ -116,46 +201,48 @@ export default function Home() {
                   Quero me inscrever <ArrowIcon />
                 </button>
                 <a className="text-link" href="#programa">
-                  Conhecer o programa <span aria-hidden="true">↓</span>
+                  Conhecer o programa <ArrowDown aria-hidden="true" size={15} weight="bold" />
                 </a>
               </div>
-              <div className="hero-trust">
-                <span><CheckIcon /> Fundamentos ópticos</span>
-                <span><CheckIcon /> Campo claro e escuro</span>
-                <span><CheckIcon /> Prática organizada</span>
-              </div>
-            </div>
+            </HeroReveal>
 
-            <div className="hero-visual" aria-label="Representação abstrata de uma observação microscópica">
+            <HeroReveal
+              className="hero-visual"
+              delay={0.12}
+              ariaLabel="Representação abstrata de uma observação microscópica"
+            >
               <div className="visual-label visual-label-top">
                 <span>Campo claro</span>
                 <strong>01</strong>
               </div>
-              <div className="microscope-field">
+              <MicroscopeMotion>
                 <div className="cell cell-a" />
                 <div className="cell cell-b" />
                 <div className="cell cell-c" />
                 <div className="cell cell-d" />
                 <div className="reticle horizontal" />
                 <div className="reticle vertical" />
-              </div>
+              </MicroscopeMotion>
               <div className="visual-label visual-label-bottom">
                 <strong>100×</strong>
                 <span>ampliação ilustrativa</span>
               </div>
-            </div>
-          </div>
-          <div className="shell hero-footnote">
-            <span>ICIBINA</span>
-            <p>Ciências biomédicas naturais + visão integral da saúde</p>
-            <span>MENCI</span>
+            </HeroReveal>
           </div>
         </section>
 
-        <section className="intro section" id="sobre">
+        <div className="trust-rail" aria-label="Destaques da formação">
+          <div className="shell trust-rail-inner">
+            <strong>ICIBINA + MENCI</strong>
+            <span><CheckIcon /> Fundamentos ópticos</span>
+            <span><CheckIcon /> Campo claro e escuro</span>
+            <span><CheckIcon /> Prática organizada</span>
+          </div>
+        </div>
+
+        <RevealSection className="intro section" id="sobre">
           <div className="shell intro-grid">
             <div>
-              <p className="section-number">01 — A formação</p>
               <h2>Do primeiro ajuste à <em>observação com método.</em></h2>
             </div>
             <div className="intro-copy">
@@ -178,13 +265,12 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className="outcomes section" id="aprendizado">
+        <RevealSection className="outcomes section" id="aprendizado">
           <div className="shell">
             <div className="section-heading">
               <div>
-                <p className="section-number light">02 — O que você desenvolve</p>
                 <h2>Clareza em cada <em>etapa da observação.</em></h2>
               </div>
               <p>
@@ -193,23 +279,23 @@ export default function Home() {
               </p>
             </div>
             <div className="outcome-grid">
-              {learningOutcomes.map((item) => (
-                <article key={item.number} className="outcome-card">
+              {learningOutcomes.map((item, index) => (
+                <DepthCard key={item.number} className="outcome-card depth-card" index={index}>
                   <span>{item.number}</span>
                   <div className={`outcome-icon icon-${item.number}`} aria-hidden="true"><i /></div>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                </article>
+                </DepthCard>
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className="comparison section">
+        <RevealSection className="comparison section">
           <div className="shell">
-            <p className="section-number">03 — Duas técnicas, novos contrastes</p>
+            <p className="section-number">Duas técnicas, novos contrastes</p>
             <div className="comparison-grid">
-              <article className="field-card bright-field">
+              <DepthCard className="field-card bright-field depth-card" index={0}>
                 <div className="field-copy">
                   <span>Campo claro</span>
                   <h2>Luz que <em>revela.</em></h2>
@@ -221,8 +307,8 @@ export default function Home() {
                 <div className="field-art" aria-hidden="true">
                   <i /><i /><i />
                 </div>
-              </article>
-              <article className="field-card dark-field">
+              </DepthCard>
+              <DepthCard className="field-card dark-field depth-card" index={1}>
                 <div className="field-copy">
                   <span>Campo escuro</span>
                   <h2>Contraste que <em>destaca.</em></h2>
@@ -234,15 +320,14 @@ export default function Home() {
                 <div className="field-art" aria-hidden="true">
                   <i /><i /><i /><i />
                 </div>
-              </article>
+              </DepthCard>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className="program section" id="programa">
+        <RevealSection className="program section" id="programa">
           <div className="shell program-grid">
             <div className="program-sticky">
-              <p className="section-number">04 — Programa completo</p>
               <h2>Uma jornada em <em>10 módulos.</em></h2>
               <p>
                 Do primeiro ajuste à revisão integrada da prática, cada módulo
@@ -265,13 +350,12 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className="method section">
+        <RevealSection className="method section">
           <div className="shell">
             <div className="section-heading method-heading">
               <div>
-                <p className="section-number">05 — Método de aprendizagem</p>
                 <h2>Entenda. Ajuste. <em>Observe.</em></h2>
               </div>
               <p>
@@ -285,12 +369,12 @@ export default function Home() {
                 ["02", "Demonstração", "Veja a técnica aplicada em uma sequência clara."],
                 ["03", "Observação", "Reconheça estruturas dentro do escopo apresentado."],
                 ["04", "Discussão", "Conecte o aprendizado a casos selecionados."],
-              ].map(([number, title, text]) => (
-                <article key={number}>
+              ].map(([number, title, text], index) => (
+                <DepthCard key={number} className="method-card depth-card" index={index}>
                   <span>{number}</span>
                   <h3>{title}</h3>
                   <p>{text}</p>
-                </article>
+                </DepthCard>
               ))}
             </div>
             <div className="preview-frame">
@@ -311,9 +395,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className="institutions section" id="instituicoes">
+        <RevealSection className="institutions section" id="instituicoes">
           <div className="shell institutions-grid">
             <div className="institution-visual">
               <Image
@@ -326,7 +410,6 @@ export default function Home() {
               <p>Ciência, prática e cuidado integral em diálogo.</p>
             </div>
             <div className="institution-copy">
-              <p className="section-number light">06 — Quem desenvolveu</p>
               <h2>ICIBINA <span>&</span> MENCI</h2>
               <p className="large-copy">
                 Uma parceria dedicada a aproximar o rigor das ciências biomédicas
@@ -346,13 +429,36 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className="offer section" id="oferta">
+        <RevealSection className="lead-capture section" id="informacoes">
+          <div className="shell lead-capture-grid">
+            <div className="lead-capture-copy">
+              <p className="section-number">Ainda está avaliando?</p>
+              <h2>Receba os detalhes e decida <em>com tranquilidade.</em></h2>
+              <p>
+                Deixe seu contato para receber informações sobre o curso. Se já
+                estiver pronto para começar, a inscrição direta continua
+                disponível no checkout seguro da Hotmart.
+              </p>
+              <ul>
+                <li><CheckIcon /> Conteúdo e próximos passos</li>
+                <li><CheckIcon /> Comunicação identificada como ICIBINA</li>
+                <li><CheckIcon /> Cancelamento de e-mails a qualquer momento</li>
+              </ul>
+            </div>
+            <div className="lead-form-card">
+              <p className="eyebrow"><span /> Interesse no curso</p>
+              <h3>Quero receber informações</h3>
+              <LeadCaptureForm />
+            </div>
+          </div>
+        </RevealSection>
+
+        <RevealSection className="offer section" id="oferta">
           <div className="shell">
             <div className="offer-card">
               <div className="offer-copy">
-                <p className="section-number">07 — Próximo passo</p>
                 <h2>Prepare-se para observar com <em>mais método.</em></h2>
                 <p>
                   Fale com a equipe do ICIBINA para receber informações sobre
@@ -386,12 +492,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className="faq section" id="faq">
+        <RevealSection className="faq section" id="faq">
           <div className="shell faq-grid">
             <div>
-              <p className="section-number">08 — Perguntas frequentes</p>
               <h2>Antes de <em>começar.</em></h2>
               <p>
                 Informações essenciais para você conhecer a proposta da formação.
@@ -409,7 +514,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
       </div>
 
       <footer>
@@ -426,20 +531,20 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span className="contact-icon" aria-hidden="true">f</span>
+                <span className="contact-icon" aria-hidden="true"><FacebookLogo size={15} weight="fill" /></span>
                 Facebook
               </a>
               <a href="mailto:icibina@yahoo.com">
-                <span className="contact-icon" aria-hidden="true">@</span>
+                <span className="contact-icon" aria-hidden="true"><EnvelopeSimple size={15} weight="bold" /></span>
                 icibina@yahoo.com
               </a>
               <a href="tel:+5534992797595">
-                <span className="contact-icon" aria-hidden="true">☎</span>
+                <span className="contact-icon" aria-hidden="true"><Phone size={15} weight="bold" /></span>
                 (34) 99279-7595
               </a>
               <span>
-                <span className="contact-icon" aria-hidden="true">⌖</span>
-                Rua Manuel Pires de Miranda, 841 — Nova Ponte, MG
+                <span className="contact-icon" aria-hidden="true"><MapPin size={15} weight="fill" /></span>
+                Rua Manuel Pires de Miranda, 841, Nova Ponte, MG
               </span>
             </address>
           </div>
@@ -457,6 +562,9 @@ export default function Home() {
             <button className="footer-link" onClick={() => setShowPreferences(true)}>
               Preferências de cookies
             </button>
+            <a className="footer-link" href="/politica-de-privacidade">
+              Política de privacidade
+            </a>
           </div>
         </div>
         <div className="shell footer-bottom">
@@ -491,7 +599,9 @@ export default function Home() {
             aria-labelledby="cookie-title"
             onMouseDown={(event) => event.stopPropagation()}
           >
-            <button className="modal-close" aria-label="Fechar" onClick={() => setShowPreferences(false)}>×</button>
+            <button className="modal-close" aria-label="Fechar" onClick={() => setShowPreferences(false)}>
+              <X aria-hidden="true" size={24} weight="bold" />
+            </button>
             <p className="section-number">Privacidade</p>
             <h2 id="cookie-title">Preferências de cookies</h2>
             <div className="cookie-category">
