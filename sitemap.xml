@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<url>
+<loc>https://microscopia.icibina.com.br</loc>
+<image:image>
+<image:loc>https://microscopia.icibina.com.br/og.png</image:loc>
+</image:image>
+<lastmod>2026-10-13T22:27:57.301Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>1</priority>
+</url>
+<url>
+<loc>https://microscopia.icibina.com.br/politica-de-privacidade</loc>
+<lastmod>2026-10-13T22:27:57.301Z</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.3</priority>
+</url>
+</urlset>

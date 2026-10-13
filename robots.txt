@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /
+Disallow: /area-do-aluno/
+Disallow: /aula/
+Disallow: /checkout/
+Disallow: /pedido-confirmado/
+
+Host: https://microscopia.icibina.com.br
+Sitemap: https://microscopia.icibina.com.br/sitemap.xml
